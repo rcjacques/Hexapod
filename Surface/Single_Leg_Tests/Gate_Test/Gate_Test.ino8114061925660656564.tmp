@@ -1,0 +1,25 @@
+#include <Servo.h>
+
+Servo foot;
+Servo segment;
+Servo shoulder;
+
+const int footPin = 1;
+const int segmentPin = 5;
+const int shoulderPin = 3;
+
+const int footStand = 60;
+const int segmentStand = 20;
+const int shoulderStand = 90;
+
+void setup() {
+  foot.attach(footPin); //lower pos = 0; middle pos = 115; upper pos = 180
+  segment.attach(segmentPin); //lower pos = 0; middle pos = 45; upper pos = 180
+  shoulder.attach(shoulderPin); //left pos = 180; middle pos = 90; right pos = 0
+}
+
+void loop() {
+  foot.write(40); 
+  segment.write(45); 
+  shoulder.write(90); 
+}

@@ -1,0 +1,74 @@
+#include <Wire.h>
+#include <Adafruit_PWMServoDriver.h>
+
+Adafruit_PWMServoDriver pwm = Adafruit_PWMServoDriver();
+
+#define SERVOMIN  110 // this is the 'minimum' pulse length count (out of 4096)
+#define SERVOMAX  540 // this is the 'maximum' pulse length count (out of 4096)
+
+const int RF_foot = 0;
+const int RF_seg = 1;
+const int RF_sho = 2;
+
+const int RM_foot = 3;
+const int RM_seg = 4;
+const int RM_sho = 5;
+
+const int RB_foot = 6;
+const int RB_seg = 7;
+const int RB_sho = 8;
+
+const int LF_foot = 9;
+const int LF_seg = 10;
+const int LF_sho = 11;
+
+const int LM_foot = 12; 
+const int LM_seg = 13;
+const int LM_sho = 14;
+
+const int LB_foot = 15;
+const int LB_seg = 16;
+const int LB_sho = 17;
+
+
+void setup() {
+  Serial.begin(9600);
+
+  pwm.begin();
+  
+  pwm.setPWMFreq(60);  // Analog servos run at ~60 Hz updates
+
+  yield();
+}
+
+//servo command: pwm.setPWM(SERVO_NUM, 0, PULSE_LENGTH);
+
+int p2d(int degrees){
+  return map(degrees, 0, 180, SERVOMIN, SERVOMAX);
+}
+
+void loop() {
+  pwm.setPWM(RF_foot, 0, p2d(50)); //
+  pwm.setPWM(RF_seg, 0, p2d(0)); 
+  pwm.setPWM(RF_sho, 0, p2d(70)); //
+  
+  pwm.setPWM(RM_foot, 0, p2d(45)); //
+  pwm.setPWM(RM_seg, 0, p2d(60)); //
+  pwm.setPWM(RM_sho, 0, p2d(70)); //
+
+  pwm.setPWM(RB_foot, 0, p2d(65)); //
+  pwm.setPWM(RB_seg, 0, p2d(45)); //
+  pwm.setPWM(RB_sho, 0, p2d(60)); //
+
+  pwm.setPWM(LF_foot, 0, p2d(50)); //
+  pwm.setPWM(LF_seg, 0, p2d(35)); //
+  pwm.setPWM(LF_sho, 0, p2d(70)); //
+
+  pwm.setPWM(LM_foot, 0, p2d(40)); 
+  pwm.setPWM(LM_seg, 0, p2d(25)); 
+  pwm.setPWM(LM_sho, 0, p2d(75)); //
+
+  pwm.setPWM(LB_foot, 0, p2d(115)); 
+  pwm.setPWM(LB_seg, 0, p2d(45)); 
+  pwm.setPWM(LB_sho, 0, p2d(90)); 
+}
